@@ -1,9 +1,9 @@
-# PHP Apache Docker Setup
+# PHP Apache Docker Setup for Arm64/8
 
-This README provides instructions on how to build and run a Docker container using the provided Dockerfile. The Dockerfile sets up an Apache web server with PHP 8.2, including several common extensions and configurations.
+This README provides instructions on how to build and run a Docker container using the provided Dockerfile for M1 and above. The Dockerfile sets up an Apache web server with PHP 8.2, including several common extensions and configurations.
 
 ## Prerequisites
-
+-  Mac with ARM processor
 - Docker installed on your system
 - Basic knowledge of Docker commands
 
