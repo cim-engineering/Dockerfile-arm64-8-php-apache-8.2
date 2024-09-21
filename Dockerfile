@@ -10,13 +10,17 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     && rm -rf /var/lib/apt/lists/*
 
-#PHP extensions
+# PHP extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip
 
-#Redis extension
+# add GD extension to support avatar creation
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
+# Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
 
-#Apache mod_rewrite
+# Apache mod_rewrite
 RUN a2enmod rewrite
 
 # Change Apache document root to /app
@@ -29,11 +33,11 @@ WORKDIR /app
 # Update the Apache environment to point to the new document root
 ENV APACHE_DOCUMENT_ROOT /app
 
-#.htaccess configs 
+# .htaccess configs
 RUN sed -i '/<Directory \/app>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 RUN sed -i 's/html/app/g' /etc/apache2/sites-available/000-default.conf
 
-#disable PHP error handling
+# disable PHP error handling
 RUN echo "error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT" > /usr/local/etc/php/conf.d/error-handling.ini \
     && echo "display_errors = Off" >> /usr/local/etc/php/conf.d/error-handling.ini \
     && echo "display_startup_errors = Off" >> /usr/local/etc/php/conf.d/error-handling.ini \
