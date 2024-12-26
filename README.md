@@ -22,7 +22,7 @@ This README provides instructions on how to build and run a Docker container usi
    This command builds a Docker image and tags it as `php-apache-app`. The `.` at the end specifies that the Dockerfile is in the current directory.
 
 ## Note
-- `php-apache-app`: this tag naming can also be changed in the commad above to any relatable name of your liking ie: the command can also looke like this ` docker build -t php-apache-php-8 .` or anything else of your choosing.
+- `php-apache-app`: this tag naming can also be changed in the commad above to any relatable name of your liking ie: the command can also look like this ` docker build -t php-apache-php-8 .` or anything else of your choosing.
 
 ## Running the Docker Container
 
